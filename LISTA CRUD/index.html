@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teste</title>
+</head>
+<body>
+    <script>
+      var lista = {inicio: null};
+
+function criaNo(nome) {
+    return {
+        dado: nome,
+        proximo: null
+    };
+}
+
+function menu() {
+  let opcao;
+
+  do {
+    opcao = prompt(
+      "Menu\n" +
+      "1 - Listar todos\n" +
+      "2 - Inserir no fim\n" +
+      "3 - Inserir na posição\n" +
+      "9 - Sair"
+    );
+
+    if (opcao == 1) {
+      if (lista.inicio == null) {
+        alert("Lista vazia");
+      } else {
+        let texto = "";
+        let atual = lista.inicio;
+        while (atual != null) {
+            texto += atual.dado + "\n";
+            atual = atual.proximo;
+        }
+        alert(texto);
+      }
+    } else if (opcao == 2) {
+        let novo = criaNo(prompt("Digite o nome:"));
+        if (lista.inicio == null) {
+            lista.inicio = novo;
+        } else {
+            let atual = lista.inicio;
+            while (atual.proximo != null) {
+                atual = atual.proximo;
+            }
+            atual.proximo = novo;
+        }
+        
+    } else if (opcao == 3) {
+        let novo = criaNo(prompt("Digite o nome:"));
+        let posicao = Number(prompt("Digite a posição:"));
+
+        if (posicao == 0) {
+            novo.proximo = lista.inicio;
+            lista.inicio = novo;
+        } else {
+            let atual = lista.inicio;
+            for (let i = 0; i < posicao - 1 && atual != null; i++) {
+                atual = atual.proximo;
+            }
+            
+            if (atual != null) {
+                novo.proximo = atual.proximo;
+                atual.proximo = novo;
+            } else {
+                alert("Posição inválida!");
+            }
+        }
+    } else if (opcao == 9) {
+        alert("Saindo...");
+
+    } else {
+        alert("Opção Inválida...")
+    }
+
+  } while (opcao != 9);
+}
+menu();
+
+    </script>
+</body>
+</html>
